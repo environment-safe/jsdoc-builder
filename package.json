@@ -1,0 +1,61 @@
+{
+    "name": "jsdoc-builder",
+    "version": "0.0.1",
+    "type": "module",
+    "main": "dist/index.mjs",
+    "module": "src/index.mjs",
+    "commonjs": "dist/index.cjs",
+    "exports": {
+        ".": {
+            "import": "./src/index.mjs",
+            "require": "./dist/index.cjs"
+        },
+        "./src/index.mjs": {
+            "import": "./src/index.mjs",
+            "require": "./dist/index.cjs"
+        },
+        "./dist/index.cjs": {
+            "import": "./src/index.mjs",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "homepage": "https://github.com/environment-safe/jsdoc-builder",
+    "description": "Build jsdoc directly into docs and types.",
+    "keywords": [],
+    "author": "Abbey Hawk Sparrow <khrome>(http://abbeyhawksparrow.com)",
+    "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/environment-safe/jsdoc-builder"
+    },
+    "bugs": {
+        "url": "https://github.com/repos/environment-safe/jsdoc-builder/issues"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "chai": "^4.3.7",
+        "eslint": "^8.43.0",
+        "@environment-safe/commonjs-builder": "^0.0.1",
+        "@environment-safe/chai": "^0.1.0",
+        "husky": "^8.0.3",
+        "mocha": "^10.2.0",
+    },
+    "scripts": {
+        "lint": "./node_modules/.bin/eslint src/*.mjs test/*.mjs",
+        "import-test": "./node_modules/.bin/mocha test/test.mjs",
+        "require-test": "./node_modules/.bin/mocha test/test.cjs",
+        "build-commonjs": "build-commonjs",
+        "container-test": "docker build . -t environment-safe-package.json -f ./containers/test.dockerfile; docker logs --follow \"$(docker run -d environment-safe-package.json)\"",
+        "generate-docs": "",
+        "generate-types": "",
+        "add-generated-files-to-commit": "git add docs/*.md; git add src/*.d.ts; git add dist/*.cjs",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "jsdoc": "^3.6.11",
+        "jsdoc-to-markdown": "^8.0.0",
+        "tsd-jsdoc": "^2.5.0",
+        "async-arrays": "^2.0.0",
+        "browser-or-node": "^2.1.1"
+    }
+}
