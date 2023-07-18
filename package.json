@@ -38,7 +38,7 @@
         "@environment-safe/commonjs-builder": "^0.0.1",
         "@environment-safe/chai": "^0.1.0",
         "husky": "^8.0.3",
-        "mocha": "^10.2.0",
+        "mocha": "^10.2.0"
     },
     "scripts": {
         "lint": "./node_modules/.bin/eslint src/*.mjs test/*.mjs",
@@ -46,7 +46,7 @@
         "require-test": "./node_modules/.bin/mocha test/test.cjs",
         "build-commonjs": "build-commonjs",
         "container-test": "docker build . -t environment-safe-package.json -f ./containers/test.dockerfile; docker logs --follow \"$(docker run -d environment-safe-package.json)\"",
-        "generate-docs": "",
+        "generate-docs": "./bin/build.js docs",
         "generate-types": "",
         "add-generated-files-to-commit": "git add docs/*.md; git add src/*.d.ts; git add dist/*.cjs",
         "prepare": "husky install"
