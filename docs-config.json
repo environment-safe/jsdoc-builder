@@ -1,1 +1,15 @@
-{}
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["."],
+    "includePattern": ".(mjs)$"
+  },
+  "plugins": [ ],
+  "opts": {
+      "template": "./node_modules/jsdoc/templates/default"
+  },
+  "sourceType": "module"
+}
