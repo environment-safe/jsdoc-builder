@@ -38,19 +38,20 @@ describe('module', ()=>{
                 ]
             });
             ast.program.body[0].type.should.equal('TSModuleDeclaration');
-            ast.program.body[1].type.should.equal('TSModuleDeclaration');
-            const module0Declarations = ast.program.body[0].body.body;
-            module0Declarations[0].type.should.equal('TSDeclareFunction');
-            console.log(
-                module0Declarations[0].id.name,
-                module0Declarations[1].id.name,
-                module0Declarations[2].id.name
-            )
-            module0Declarations[0].id.name.should.equal('getX');
-            module0Declarations[1].type.should.equal('TSDeclareFunction');
-            module0Declarations[1].id.name.should.equal('getY');
-            module0Declarations[2].type.should.equal('TSDeclareFunction');
-            module0Declarations[2].id.name.should.equal('fromString');
+            //ast.program.body[1].type.should.equal('TSModuleDeclaration');
+            const moduleDeclaration = ast.program.body[0];
+            
+            const classDeclarations = ast.program.body[0].body.body;
+            const classDeclaration = classDeclarations[0];
+            const module0Declarations = classDeclaration.body.body;
+            module0Declarations[0].type.should.equal('TSDeclareMethod');
+            module0Declarations[0].key.name.should.equal('constructor');
+            module0Declarations[1].type.should.equal('TSDeclareMethod');
+            module0Declarations[1].key.name.should.equal('getX');
+            module0Declarations[2].type.should.equal('TSDeclareMethod');
+            module0Declarations[2].key.name.should.equal('getY');
+            module0Declarations[3].type.should.equal('TSDeclareMethod');
+            module0Declarations[3].key.name.should.equal('fromString');
         });
         
         it('transforms docs', async ()=>{

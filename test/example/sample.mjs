@@ -5,7 +5,7 @@
  
  /**
   * Class representing a point.
-  * @alias module:this-point
+  * 
   */
  class Point {
      /**

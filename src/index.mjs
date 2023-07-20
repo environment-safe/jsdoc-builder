@@ -17,14 +17,11 @@ const runJSDocTypes = async (type, pattern, destination)=>{
             join(__dirname, '..', `${destination}`)
         }" "${file}"`;
         
-        console.log(command);
         await new Promise((resolveExec)=>{
             exec(command, (error, stdout, stderr) => {
                 if(error) return reject(error);
-                console.log(`stdout: ${stdout}`);
-                console.error(`stderr: ${stderr}`);
-                resolveExec();
-                console.log()
+                if(stderr) return reject(stderr);
+                resolveExec(stdout);
             }); 
         });
         await new Promise((resolveExec)=>{
@@ -41,7 +38,6 @@ const runJSDocTypes = async (type, pattern, destination)=>{
 }
 
 const runJSDoc = async (type='', pattern, destination)=>{
-    console.log('TYPE', type)
     switch(type.toLowerCase()){
         case 'types' : return await runJSDocTypes(type, pattern, destination);
         case 'docs' : return await runJSDocDocs(type, pattern, destination);
@@ -60,14 +56,11 @@ const runJSDocDocs = async (type, pattern, destination)=>{
             join(__dirname, '..', `${destination}`)
         }" "${file}"`;
         
-        console.log(command);
         await new Promise((resolveExec)=>{
             exec(command, (error, stdout, stderr) => {
                 if(error) return reject(error);
-                console.log(`stdout: ${stdout}`);
-                console.error(`stderr: ${stderr}`);
-                resolveExec();
-                console.log()
+                if(stderr) return reject(stderr);
+                resolveExec(stdout);
             }); 
         });
         /*await new Promise((resolveExec)=>{
@@ -98,9 +91,7 @@ const runJSDocWithConfig = async (type, files, destination)=>{
                 join(__dirname, '..', destination)
         )
     };
-    console.log(options);
     const code = jsdoc.renderSync(options);
-    console.log('>>>', code, options);
     return code;
 };
 
