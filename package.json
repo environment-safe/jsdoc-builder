@@ -1,6 +1,6 @@
 {
     "name": "@environment-safe/jsdoc-builder",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "type": "module",
     "main": "dist/index.mjs",
     "module": "src/index.mjs",
@@ -41,19 +41,22 @@
         "mocha": "^10.2.0",
         "rimraf": "^5.0.1"
     },
+    "bin":{
+        "build-jsdoc":"./bin/build.mjs"
+    },
     "scripts": {
         "lint": "./node_modules/.bin/eslint src/*.mjs test/*.mjs",
         "import-test": "./node_modules/.bin/mocha test/test.mjs",
         "require-test": "./node_modules/.bin/mocha test/test.cjs",
         "build-commonjs": "build-commonjs",
         "container-test": "docker build . -t environment-safe-package.json -f ./containers/test.dockerfile; docker logs --follow \"$(docker run -d environment-safe-package.json)\"",
-        "generate-docs": "./bin/build.js docs",
-        "generate-types": "",
+        "generate-docs": "./bin/build.mjs docs",
+        "generate-types": "./bin/build.mjs types",
         "add-generated-files-to-commit": "git add docs/*.md; git add src/*.d.ts; git add dist/*.cjs",
         "prepare": "husky install"
     },
     "dependencies": {
-        "@environment-safe/tsd-jsdoc": "^2.5.0",
+        "@environment-safe/tsd-jsdoc": "^3.0.0",
         "async-arrays": "^2.0.0",
         "browser-or-node": "^2.1.1",
         "glob": "^10.3.3",
